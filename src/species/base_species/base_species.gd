@@ -49,4 +49,4 @@ func _get_new_target_position() -> Vector2:
 
 
 func _draw() -> void:
-	draw_line(Vector2.ZERO, _target_position - position, Color.red, 4)
+	draw_line(Vector2.ZERO, _target_position - position, Color.red, 4, true)
