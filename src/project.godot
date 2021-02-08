@@ -18,6 +18,10 @@ _global_script_class_icons={
 config/name="Natural Selection"
 config/icon="res://icon.png"
 
+[autoload]
+
+Rand="*res://utility/random.gd"
+
 [rendering]
 
 quality/driver/driver_name="GLES2"
