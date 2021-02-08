@@ -3,8 +3,8 @@ extends KinematicBody2D
 const AT_TARGET_THRESHOLD := 30.0
 
 export var max_health := 100.0 # Currently unused
-export var vision_radius := 100.0
-export var speed := 100.0
+export var vision_radius := 200.0
+export var speed := 200.0
 
 var _velocity := Vector2.ZERO
 var _is_moving_to_target := false
