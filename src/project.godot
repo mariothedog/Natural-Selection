@@ -23,6 +23,11 @@ config/icon="res://icon.png"
 
 Rand="*res://utility/random.gd"
 
+[layer_names]
+
+2d_physics/layer_1="world"
+2d_physics/layer_2="organisms"
+
 [rendering]
 
 quality/driver/driver_name="GLES2"
