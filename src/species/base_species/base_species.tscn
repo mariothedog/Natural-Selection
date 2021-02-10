@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://species/base_species/base_species.gd" type="Script" id=1]
 [ext_resource path="res://species/base_species/base_species.png" type="Texture" id=2]
@@ -7,6 +7,9 @@
 extents = Vector2( 16, 16 )
 
 [sub_resource type="CircleShape2D" id=2]
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 23.0
 
 [node name="BaseSpecies" type="KinematicBody2D"]
 collision_layer = 2
@@ -21,7 +24,19 @@ texture = ExtResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
-[node name="VisionArea" type="Area2D" parent="."]
+[node name="FoodDetector" type="Area2D" parent="."]
+collision_layer = 2147483648
+collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="VisionArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FoodDetector"]
 shape = SubResource( 2 )
+
+[node name="Mouth" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mouth"]
+shape = SubResource( 3 )
+[connection signal="area_entered" from="FoodDetector" to="." method="_on_FoodDetector_area_entered"]
+[connection signal="area_exited" from="FoodDetector" to="." method="_on_FoodDetector_area_exited"]
+[connection signal="area_entered" from="Mouth" to="." method="_on_Mouth_area_entered"]

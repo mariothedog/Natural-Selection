@@ -27,6 +27,7 @@ Rand="*res://utility/random.gd"
 
 2d_physics/layer_1="world"
 2d_physics/layer_2="organisms"
+2d_physics/layer_3="food"
 
 [rendering]
 
