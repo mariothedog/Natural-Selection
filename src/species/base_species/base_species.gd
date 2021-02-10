@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 const AT_TARGET_THRESHOLD := 30.0
+const HEALTH_LOSS_RATE := 10.0 # Health lost/second
 
 export var max_health := 100.0 # Currently unused
 export var vision_radius := 200.0
@@ -20,10 +21,12 @@ func _ready() -> void:
 	$FoodDetector/CollisionShape2D.shape.radius = vision_radius
 
 
-func _physics_process(_delta) -> void:
+func _physics_process(delta) -> void:
 	_ai()
 	update()
 	_velocity = move_and_slide(_velocity)
+	
+	hurt(HEALTH_LOSS_RATE * delta)
 
 
 func _ai() -> void:
@@ -70,3 +73,15 @@ func _sort_closest_vector2(a: Vector2, b: Vector2) -> bool:
 
 func _on_Mouth_area_entered(area: Area2D) -> void:
 	area.die()
+	health = max_health
+
+
+func hurt(damage: float) -> void:
+	health -= damage
+	if health <= 0:
+		health = 0
+		die()
+
+
+func die() -> void:
+	queue_free()
