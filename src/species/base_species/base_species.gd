@@ -6,7 +6,7 @@ const AT_TARGET_THRESHOLD := 30.0
 const HEALTH_LOSS_RATE := 10.0 # Health lost/second
 const REPRODUCTIVE_CHANCE := 0.1#1.0 # Chance each second
 
-export var max_health := 100.0 # Currently unused
+export var max_health := 100.0
 export var vision_radius := 200.0
 export var speed := 200.0
 
@@ -15,7 +15,7 @@ var _is_moving_to_target := false
 var _target_position := Vector2.ZERO
 var _food_in_range := [] # Each food's global position ordered in ascending distance
 
-onready var health := max_health # Currently unused
+onready var health := max_health
 
 onready var space_state := get_world_2d().direct_space_state
 
