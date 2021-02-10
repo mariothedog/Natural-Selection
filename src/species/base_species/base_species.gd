@@ -26,7 +26,6 @@ func _ready() -> void:
 
 func _physics_process(delta) -> void:
 	_ai()
-	update()
 	_velocity = move_and_slide(_velocity)
 	
 	hurt(HEALTH_LOSS_RATE * delta)
@@ -55,11 +54,6 @@ func _ai() -> void:
 func _get_new_target_position() -> Vector2:
 	var dir := Vector2(rand_range(-1, 1), rand_range(-1, 1)).normalized()
 	return position + dir * vision_radius
-
-
-func _draw() -> void:
-	if _target_position:
-		draw_line(Vector2.ZERO, _target_position - position, Color.red, 4, true)
 
 
 func _on_FoodDetector_area_entered(area: Area2D) -> void:
