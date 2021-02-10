@@ -17,9 +17,9 @@ var _is_moving_to_target := false
 var _target_position := Vector2.ZERO
 var _food_in_range := []  # Each food's global position ordered in ascending distance
 
-onready var health: float = phenotypes.max_health
+var _target_position_rng := Rand.get_new_random_generator()
 
-onready var target_position_rng := Rand.get_new_random_generator()
+onready var health: float = phenotypes.max_health
 
 onready var space_state := get_world_2d().direct_space_state
 
@@ -72,7 +72,7 @@ func _ai() -> void:
 
 
 func _get_new_target_position() -> Vector2:
-	var dir := Vector2(target_position_rng.randf_range(-1, 1), target_position_rng.randf_range(-1, 1)).normalized()
+	var dir := Vector2(_target_position_rng.randf_range(-1, 1), _target_position_rng.randf_range(-1, 1)).normalized()
 	return position + dir * phenotypes.vision_radius
 
 
