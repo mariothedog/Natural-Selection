@@ -29,6 +29,10 @@ Rand="*res://utility/random.gd"
 2d_physics/layer_2="organisms"
 2d_physics/layer_3="food"
 
+[network]
+
+limits/debugger_stdout/max_chars_per_second=20480
+
 [rendering]
 
 quality/driver/driver_name="GLES2"
