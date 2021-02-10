@@ -37,6 +37,10 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mouth"]
 shape = SubResource( 3 )
+
+[node name="CreateBaby" type="Timer" parent="."]
+autostart = true
 [connection signal="area_entered" from="FoodDetector" to="." method="_on_FoodDetector_area_entered"]
 [connection signal="area_exited" from="FoodDetector" to="." method="_on_FoodDetector_area_exited"]
 [connection signal="area_entered" from="Mouth" to="." method="_on_Mouth_area_entered"]
+[connection signal="timeout" from="CreateBaby" to="." method="_on_CreateBaby_timeout"]
