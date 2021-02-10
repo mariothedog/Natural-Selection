@@ -33,6 +33,22 @@ func _physics_process(delta) -> void:
 	hurt(HEALTH_LOSS_RATE * delta)
 
 
+func hurt(damage: float) -> void:
+	health -= damage
+	if health <= 0:
+		health = 0
+		die()
+
+
+func die() -> void:
+	queue_free()
+
+
+func _on_CreateBaby_timeout() -> void:
+	if randf() < REPRODUCTIVE_CHANCE:
+		emit_signal("baby_wanted", self)
+
+
 func _ai() -> void:
 	if _is_moving_to_target:
 		_velocity = position.direction_to(_target_position) * speed
@@ -74,19 +90,3 @@ func _sort_closest_vector2(a: Vector2, b: Vector2) -> bool:
 func _on_Mouth_area_entered(area: Area2D) -> void:
 	area.die()
 	health = max_health
-
-
-func hurt(damage: float) -> void:
-	health -= damage
-	if health <= 0:
-		health = 0
-		die()
-
-
-func die() -> void:
-	queue_free()
-
-
-func _on_CreateBaby_timeout() -> void:
-	if randf() < REPRODUCTIVE_CHANCE:
-		emit_signal("baby_wanted", self)
