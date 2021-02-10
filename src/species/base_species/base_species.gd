@@ -3,8 +3,8 @@ extends KinematicBody2D
 signal baby_wanted(parent)
 
 const AT_TARGET_THRESHOLD := 30.0
-const HEALTH_LOSS_RATE := 10.0 # Health lost/second
-const REPRODUCTIVE_CHANCE := 0.1#1.0 # Chance each second
+const HEALTH_LOSS_RATE := 10.0  # Health lost/second
+const REPRODUCTIVE_CHANCE := 0.1  #1.0 # Chance each second
 
 export var max_health := 100.0
 export var vision_radius := 200.0
@@ -13,7 +13,7 @@ export var speed := 200.0
 var _velocity := Vector2.ZERO
 var _is_moving_to_target := false
 var _target_position := Vector2.ZERO
-var _food_in_range := [] # Each food's global position ordered in ascending distance
+var _food_in_range := []  # Each food's global position ordered in ascending distance
 
 onready var health := max_health
 
@@ -27,7 +27,7 @@ func _ready() -> void:
 func _physics_process(delta) -> void:
 	_ai()
 	_velocity = move_and_slide(_velocity)
-	
+
 	hurt(HEALTH_LOSS_RATE * delta)
 
 
@@ -39,7 +39,7 @@ func _ai() -> void:
 			_velocity = Vector2.ZERO
 			_is_moving_to_target = false
 		return
-	
+
 	if _food_in_range:
 		_target_position = _food_in_range[0]
 	else:
