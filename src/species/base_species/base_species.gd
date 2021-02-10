@@ -4,7 +4,7 @@ signal baby_wanted(parent)
 
 const AT_TARGET_THRESHOLD := 30.0
 const HEALTH_LOSS_RATE := 10.0  # Health lost/second
-const REPRODUCTIVE_CHANCE := 0.1  #1.0 # Chance each second
+const REPRODUCTIVE_CHANCE := 0.1 # Chance each second
 
 export var max_health := 100.0
 export var vision_radius := 200.0
