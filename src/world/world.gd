@@ -6,7 +6,7 @@ const BASE_FOOD_SCENE := preload("res://food/base_food/base_food.tscn")
 var _grass_tile_positions := PoolVector2Array()
 
 onready var tilemap: TileMap = $TileMap
-onready var cell_size = tilemap.cell_size
+onready var cell_size := tilemap.cell_size
 onready var tile_set: TileSet = tilemap.tile_set
 onready var organisms_node: Node = $Organisms
 onready var food_node: Node = $Food
@@ -28,7 +28,7 @@ func _ready() -> void:
 
 
 func _on_SpawnFood_timeout() -> void:
-	var food = BASE_FOOD_SCENE.instance()
+	var food := BASE_FOOD_SCENE.instance()
 	food.position = Rand.choice(_grass_tile_positions) + cell_size / 2
 	food_node.add_child(food)
 
