@@ -1,15 +1,15 @@
 extends Node
 
-onready var main_seed = OS.get_system_time_msecs()
+var MAIN_SEED = 1612975019503  #OS.get_system_time_msecs()
 
 
 func _ready() -> void:
-	print("Main Seed: ", main_seed)
+	print("Main Seed: ", MAIN_SEED)
 
 
 func get_new_random_generator() -> RandomNumberGenerator:
 	var rnd := RandomNumberGenerator.new()
-	rnd.seed = main_seed
+	rnd.seed = MAIN_SEED
 	return rnd
 
 

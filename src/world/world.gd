@@ -5,7 +5,8 @@ const BASE_FOOD_SCENE := preload("res://food/base_food/base_food.tscn")
 
 var _grass_tile_positions := PoolVector2Array()
 
-onready var food_spawn_rng := Rand.get_new_random_generator()
+var food_spawn_rng := Rand.get_new_random_generator()
+var mutation_rng := Rand.get_new_random_generator()
 
 onready var tilemap: TileMap = $TileMap
 onready var cell_size := tilemap.cell_size
@@ -37,6 +38,13 @@ func _on_SpawnFood_timeout() -> void:
 
 func _on_Species_baby_wanted(parent: KinematicBody2D) -> void:
 	var baby: KinematicBody2D = load(parent.filename).instance()
+	mutate(baby, parent)
 	baby.position = parent.position
 	assert(baby.connect("baby_wanted", self, "_on_Species_baby_wanted") == OK)
 	organisms_node.add_child(baby)
+
+
+func mutate(baby: KinematicBody2D, parent: KinematicBody2D) -> void:
+	var change := mutation_rng.randf_range(-50, 50)
+	baby.phenotypes.speed = parent.phenotypes.speed + change
+	print("Parent Speed: %f  Baby Speed: %f" % [parent.phenotypes.speed, baby.phenotypes.speed])

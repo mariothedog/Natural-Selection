@@ -6,16 +6,18 @@ const AT_TARGET_THRESHOLD := 30.0
 const HEALTH_LOSS_RATE := 20.0  # Health lost/second
 const REPRODUCTIVE_CHANCE := 0.1  # Chance each second
 
-export var max_health := 100.0
-export var vision_radius := 200.0
-export var speed := 200.0
+var phenotypes := {
+	max_health = 100.0,
+	vision_radius = 200.0,
+	speed = 200.0,
+}
 
 var _velocity := Vector2.ZERO
 var _is_moving_to_target := false
 var _target_position := Vector2.ZERO
 var _food_in_range := []  # Each food's global position ordered in ascending distance
 
-onready var health := max_health
+onready var health: float = phenotypes.max_health
 
 onready var target_position_rng := Rand.get_new_random_generator()
 
@@ -23,7 +25,7 @@ onready var space_state := get_world_2d().direct_space_state
 
 
 func _ready() -> void:
-	$FoodDetector/CollisionShape2D.shape.radius = vision_radius
+	$FoodDetector/CollisionShape2D.shape.radius = phenotypes.vision_radius
 
 
 func _physics_process(delta) -> void:
@@ -51,7 +53,7 @@ func _on_CreateBaby_timeout() -> void:
 
 func _ai() -> void:
 	if _is_moving_to_target:
-		_velocity = position.direction_to(_target_position) * speed
+		_velocity = position.direction_to(_target_position) * phenotypes.speed
 		var dist := position.distance_to(_target_position)
 		if dist <= AT_TARGET_THRESHOLD:
 			_velocity = Vector2.ZERO
@@ -71,7 +73,7 @@ func _ai() -> void:
 
 func _get_new_target_position() -> Vector2:
 	var dir := Vector2(target_position_rng.randf_range(-1, 1), target_position_rng.randf_range(-1, 1)).normalized()
-	return position + dir * vision_radius
+	return position + dir * phenotypes.vision_radius
 
 
 func _on_FoodDetector_area_entered(area: Area2D) -> void:
@@ -89,4 +91,4 @@ func _sort_closest_vector2(a: Vector2, b: Vector2) -> bool:
 
 func _on_Mouth_area_entered(area: Area2D) -> void:
 	area.die()
-	health = max_health
+	health = phenotypes.max_health
