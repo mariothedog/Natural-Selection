@@ -3,7 +3,7 @@ extends KinematicBody2D
 signal baby_wanted(parent)
 
 const AT_TARGET_THRESHOLD := 30.0
-const HEALTH_LOSS_RATE := 10.0  # Health lost/second
+const HEALTH_LOSS_RATE := 20.0  # Health lost/second
 const REPRODUCTIVE_CHANCE := 0.1 # Chance each second
 
 export var max_health := 100.0
