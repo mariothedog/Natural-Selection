@@ -4,7 +4,7 @@ signal baby_wanted(parent)
 
 const AT_TARGET_THRESHOLD := 30.0
 const HEALTH_LOSS_RATE := 20.0  # Health lost/second
-const REPRODUCTIVE_CHANCE := 0.1 # Chance each second
+const REPRODUCTIVE_CHANCE := 0.1  # Chance each second
 
 export var max_health := 100.0
 export var vision_radius := 200.0
@@ -16,6 +16,8 @@ var _target_position := Vector2.ZERO
 var _food_in_range := []  # Each food's global position ordered in ascending distance
 
 onready var health := max_health
+
+onready var target_position_rng := Rand.get_new_random_generator()
 
 onready var space_state := get_world_2d().direct_space_state
 
@@ -52,7 +54,7 @@ func _ai() -> void:
 
 
 func _get_new_target_position() -> Vector2:
-	var dir := Vector2(rand_range(-1, 1), rand_range(-1, 1)).normalized()
+	var dir := Vector2(target_position_rng.randf_range(-1, 1), target_position_rng.randf_range(-1, 1)).normalized()
 	return position + dir * vision_radius
 
 
