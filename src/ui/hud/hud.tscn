@@ -28,28 +28,31 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "Average Speed: 0"
 
-[node name="TimeScaleContainer" type="VBoxContainer" parent="MarginContainer"]
-margin_left = 5.0
+[node name="TimeScaleContainer" type="HBoxContainer" parent="MarginContainer"]
+margin_left = 888.0
 margin_top = 5.0
 margin_right = 1019.0
-margin_bottom = 595.0
-
-[node name="Label" type="Label" parent="MarginContainer/TimeScaleContainer"]
-margin_right = 1014.0
-margin_bottom = 14.0
-text = "Time Scale"
-align = 2
+margin_bottom = 29.0
+size_flags_horizontal = 8
+size_flags_vertical = 0
 
 [node name="TimeScale" type="LineEdit" parent="MarginContainer/TimeScaleContainer"]
-margin_left = 956.0
-margin_top = 18.0
-margin_right = 1014.0
-margin_bottom = 42.0
-size_flags_horizontal = 8
+margin_right = 58.0
+margin_bottom = 24.0
+size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "1"
 align = 2
 expand_to_text_length = true
 script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="MarginContainer/TimeScaleContainer"]
+margin_left = 62.0
+margin_top = 5.0
+margin_right = 131.0
+margin_bottom = 19.0
+size_flags_horizontal = 0
+text = "Time Scale"
+align = 2
 [connection signal="text_changed" from="MarginContainer/TimeScaleContainer/TimeScale" to="MarginContainer/TimeScaleContainer/TimeScale" method="_on_TimeScale_text_changed"]
 [connection signal="time_scale_changed" from="MarginContainer/TimeScaleContainer/TimeScale" to="." method="_on_TimeScale_time_scale_changed"]
