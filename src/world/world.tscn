@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://species/base_species/base_species.tscn" type="PackedScene" id=1]
 [ext_resource path="res://world/world.tres" type="TileSet" id=2]
+[ext_resource path="res://ui/hud/hud.tscn" type="PackedScene" id=3]
 [ext_resource path="res://world/world.gd" type="Script" id=4]
 
 [node name="World" type="Node"]
@@ -24,5 +25,7 @@ position = Vector2( 512, 300 )
 [node name="SpawnFood" type="Timer" parent="."]
 wait_time = 0.75
 autostart = true
+
+[node name="HUD" parent="." instance=ExtResource( 3 )]
 [connection signal="baby_wanted" from="Organisms/BaseSpecies" to="." method="_on_Species_baby_wanted"]
 [connection signal="timeout" from="SpawnFood" to="." method="_on_SpawnFood_timeout"]
