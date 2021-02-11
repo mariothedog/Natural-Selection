@@ -46,6 +46,7 @@ func make_baby(parent: KinematicBody2D) -> void:
 	var baby: KinematicBody2D = load(parent.filename).instance()
 	mutate(baby, parent)
 	baby.position = parent.position
+	assert(baby.connect("dead", self, "_on_Species_dead") == OK)
 	assert(baby.connect("baby_wanted", self, "_on_Species_baby_wanted") == OK)
 	organisms_node.add_child(baby)
 	emit_signal("baby_born", baby)
