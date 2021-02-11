@@ -12,14 +12,14 @@ var phenotypes := {
 	speed = 200.0,
 }
 
+var health: float = phenotypes.max_health
+
 var _velocity := Vector2.ZERO
 var _is_moving_to_target := false
 var _target_position := Vector2.ZERO
 var _food_in_range := []  # Each food's global position ordered in ascending distance
 
 var _target_position_rng := Rand.get_new_random_generator()
-
-onready var health: float = phenotypes.max_health
 
 onready var space_state := get_world_2d().direct_space_state
 
