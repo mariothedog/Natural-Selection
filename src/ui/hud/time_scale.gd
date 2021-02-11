@@ -12,9 +12,9 @@ func _on_TimeScale_text_changed(new_text: String) -> void:
 	if int(old_text) == num or num < 0:
 		text = old_text
 		return
-	
+
 	num = int(min(num, _max_time_scale))
-	
+
 	new_text = str(num)
 	if text != new_text:
 		text = new_text
