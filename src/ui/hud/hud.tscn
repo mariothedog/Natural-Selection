@@ -19,6 +19,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="AverageSpeed" type="Label" parent="MarginContainer"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 115.0
+margin_bottom = 19.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Average Speed: 0"
+
 [node name="TimeScaleContainer" type="VBoxContainer" parent="MarginContainer"]
 margin_left = 5.0
 margin_top = 5.0

@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+signal dead(organism)
 signal baby_wanted(parent)
 
 const AT_TARGET_THRESHOLD := 30.0
@@ -43,6 +44,7 @@ func hurt(damage: float) -> void:
 
 
 func die() -> void:
+	emit_signal("dead", self)
 	queue_free()
 
 
