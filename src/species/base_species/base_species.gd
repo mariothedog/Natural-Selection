@@ -28,7 +28,7 @@ func _ready() -> void:
 	$FoodDetector/CollisionShape2D.shape.radius = phenotypes.vision_radius
 
 
-func _physics_process(delta) -> void:
+func _physics_process(delta: float) -> void:
 	_ai()
 	_velocity = move_and_slide(_velocity)
 
