@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+var average_speed := 0.0
+
 var _population_speeds := []
 
 onready var average_speed_label: Label = $MarginContainer/AverageSpeed
@@ -25,4 +27,5 @@ func erase_population_speed(speed: float) -> void:
 
 func update_average_speed() -> void:
 	if _population_speeds:
-		average_speed_label.text = "Average Speed: %f" % Util.average(_population_speeds)
+		average_speed = Util.average(_population_speeds)
+		average_speed_label.text = "Average Speed: %f" % average_speed

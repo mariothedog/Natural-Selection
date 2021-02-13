@@ -37,6 +37,9 @@ autostart = true
 [node name="GraphPopulation" parent="." instance=ExtResource( 5 )]
 position = Vector2( 914, -110 )
 
+[node name="GraphSpeed" parent="." instance=ExtResource( 5 )]
+position = Vector2( 664, -110 )
+
 [node name="UpdateGraph" type="Timer" parent="."]
 autostart = true
 [connection signal="baby_born" from="." to="." method="_on_World_baby_born"]

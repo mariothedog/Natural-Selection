@@ -5,8 +5,10 @@ signal baby_born(baby)
 const BASE_SPECIES_SCENE := preload("res://species/base_species/base_species.tscn")
 const BASE_FOOD_SCENE := preload("res://food/base_food/base_food.tscn")
 
-const GRAPH_TIME_SCALE = 10
-const GRAPH_POPULATION_SCALE = 10
+const GRAPH_POP_TIME_SCALE := 10.0
+const GRAPH_POP_SCALE := 10.0
+const GRAPH_SPEED_TIME_SCALE := 10.0
+const GRAPH_SPEED_SCALE := 0.2
 
 var _grass_tile_positions := PoolVector2Array()
 var _elapsed_time := 0.0
@@ -20,7 +22,9 @@ onready var tile_set: TileSet = tilemap.tile_set
 onready var organisms_node: Node = $Organisms
 onready var food_node: Node = $Food
 onready var hud: CanvasLayer = $HUD
+
 onready var graph_population: Node2D = $GraphPopulation
+onready var graph_speed: Node2D = $GraphSpeed
 
 onready var Tiles := {
 	"GRASS": tile_set.find_tile_by_name("grass"),
@@ -80,6 +84,11 @@ func _on_Species_dead(organism: KinematicBody2D) -> void:
 
 
 func _on_UpdateGraph_timeout() -> void:
+	var time_pop := _elapsed_time * GRAPH_POP_TIME_SCALE
 	var num_pop := organisms_node.get_child_count()
-	var pop_point := Vector2(_elapsed_time * GRAPH_TIME_SCALE, num_pop * GRAPH_POPULATION_SCALE)
-	graph_population.add_point(pop_point)
+	var point_pop := Vector2(time_pop, num_pop * GRAPH_POP_SCALE)
+	graph_population.add_point(point_pop)
+	
+	var time_speed := _elapsed_time * GRAPH_SPEED_TIME_SCALE
+	var point_speed := Vector2(time_speed, hud.average_speed * GRAPH_SPEED_SCALE)
+	graph_speed.add_point(point_speed)
