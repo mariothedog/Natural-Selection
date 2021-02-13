@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://graph/graph.tscn" type="PackedScene" id=1]
+[ext_resource path="res://debug/graph/debug_graph.gd" type="Script" id=2]
+
+[node name="DebugGraph" type="Node"]
+script = ExtResource( 2 )
+
+[node name="Graph" parent="." instance=ExtResource( 1 )]
+position = Vector2( 200, 200 )
+
+[node name="AddPoint" type="Timer" parent="."]
+autostart = true
+[connection signal="timeout" from="AddPoint" to="." method="_on_AddPoint_timeout"]
