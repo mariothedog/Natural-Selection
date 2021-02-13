@@ -32,7 +32,6 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	_ai()
 	_velocity = move_and_slide(_velocity)
-
 	hurt(HEALTH_LOSS_RATE * delta)
 
 
