@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://species/base_species/base_species.tscn" type="PackedScene" id=1]
 [ext_resource path="res://world/world.tres" type="TileSet" id=2]
 [ext_resource path="res://ui/hud/hud.tscn" type="PackedScene" id=3]
 [ext_resource path="res://world/world.gd" type="Script" id=4]
+[ext_resource path="res://graph/graph.tscn" type="PackedScene" id=5]
 
 [node name="World" type="Node"]
 script = ExtResource( 4 )
@@ -11,6 +12,7 @@ script = ExtResource( 4 )
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 512, 300 )
 current = true
+zoom = Vector2( 2, 2 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )
@@ -31,7 +33,14 @@ wait_time = 0.75
 autostart = true
 
 [node name="HUD" parent="." instance=ExtResource( 3 )]
+
+[node name="GraphPopulation" parent="." instance=ExtResource( 5 )]
+position = Vector2( 914, -110 )
+
+[node name="UpdateGraph" type="Timer" parent="."]
+autostart = true
 [connection signal="baby_born" from="." to="." method="_on_World_baby_born"]
 [connection signal="baby_wanted" from="Organisms/BaseSpecies" to="." method="_on_Species_baby_wanted"]
 [connection signal="dead" from="Organisms/BaseSpecies" to="." method="_on_Species_dead"]
 [connection signal="timeout" from="SpawnFood" to="." method="_on_SpawnFood_timeout"]
+[connection signal="timeout" from="UpdateGraph" to="." method="_on_UpdateGraph_timeout"]

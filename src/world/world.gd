@@ -5,7 +5,11 @@ signal baby_born(baby)
 const BASE_SPECIES_SCENE := preload("res://species/base_species/base_species.tscn")
 const BASE_FOOD_SCENE := preload("res://food/base_food/base_food.tscn")
 
+const GRAPH_TIME_SCALE = 10
+const GRAPH_POPULATION_SCALE = 10
+
 var _grass_tile_positions := PoolVector2Array()
+var _elapsed_time := 0.0
 
 var _food_spawn_rng := Rand.get_new_random_generator()
 var _mutation_rng := Rand.get_new_random_generator()
@@ -16,6 +20,7 @@ onready var tile_set: TileSet = tilemap.tile_set
 onready var organisms_node: Node = $Organisms
 onready var food_node: Node = $Food
 onready var hud: CanvasLayer = $HUD
+onready var graph_population: Node2D = $GraphPopulation
 
 onready var Tiles := {
 	"GRASS": tile_set.find_tile_by_name("grass"),
@@ -34,6 +39,10 @@ func _ready() -> void:
 
 	for organism in organisms_node.get_children():
 		hud.append_population_speed(organism.phenotypes.speed)
+
+
+func _process(delta: float) -> void:
+	_elapsed_time += delta
 
 
 func _on_SpawnFood_timeout() -> void:
@@ -68,3 +77,9 @@ func _on_World_baby_born(baby: KinematicBody2D) -> void:
 
 func _on_Species_dead(organism: KinematicBody2D) -> void:
 	hud.erase_population_speed(organism.phenotypes.speed)
+
+
+func _on_UpdateGraph_timeout() -> void:
+	var num_pop := organisms_node.get_child_count()
+	var pop_point := Vector2(_elapsed_time * GRAPH_TIME_SCALE, num_pop * GRAPH_POPULATION_SCALE)
+	graph_population.add_point(pop_point)
